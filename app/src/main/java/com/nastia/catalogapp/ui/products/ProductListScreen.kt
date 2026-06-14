@@ -1,5 +1,6 @@
 package com.nastia.catalogapp.ui.products
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -8,16 +9,17 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.compose.collectAsLazyPagingItems
-import androidx.compose.ui.res.stringResource
 import com.nastia.catalogapp.R
 import com.nastia.catalogapp.ui.products.components.CategoryFilterRow
 import com.nastia.catalogapp.ui.products.components.ProductGridContent
@@ -28,8 +30,6 @@ import com.nastia.catalogapp.ui.products.components.SortDropdown
 @Composable
 fun ProductListScreen(
     onProductClick: (Int) -> Unit,
-    onNavigateToFavorites: () -> Unit,
-    onNavigateToSettings: () -> Unit,
     onAddProduct: () -> Unit,
     viewModel: ProductListViewModel = hiltViewModel()
 ) {
@@ -46,19 +46,16 @@ fun ProductListScreen(
         }
     }
 
-    Scaffold(
-        floatingActionButton = {
-            FloatingActionButton(onClick = onAddProduct) {
-                Icon(Icons.Filled.Add, contentDescription = stringResource(R.string.products_add))
-            }
-        }
-    ) { padding ->
+    Box(modifier = Modifier.fillMaxSize()) {
         PullToRefreshBox(
             isRefreshing = isRefreshing,
             onRefresh = { products.refresh() },
-            modifier = Modifier.fillMaxSize().padding(padding)
-        ) {
-            Column(modifier = Modifier.fillMaxSize().padding(padding)) {
+            modifier = Modifier.fillMaxSize()
+        )
+        {
+            Column(
+                modifier = Modifier.fillMaxSize()
+            ) {
                 ProductSearchBar(
                     query = filters.searchQuery,
                     onQueryChange = viewModel::onSearchQueryChange
@@ -79,6 +76,14 @@ fun ProductListScreen(
                     onFavoriteClick = viewModel::toggleFavorite,
                     modifier = Modifier.weight(1f)
                 )
+            }
+            FloatingActionButton(
+                onClick = onAddProduct,
+                modifier = Modifier
+                    .align(Alignment.BottomEnd)
+                    .padding(16.dp)
+            ) {
+                Icon(Icons.Filled.Add, contentDescription = stringResource(R.string.products_add))
             }
         }
     }
