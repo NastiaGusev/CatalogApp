@@ -32,6 +32,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
@@ -90,7 +91,7 @@ fun LoginScreen(
             Spacer(modifier = Modifier.height(24.dp))
 
             Text(
-                text = "Welcome to CatalogApp",
+                text = stringResource(R.string.login_title),
                 style = MaterialTheme.typography.headlineSmall
             )
 
@@ -99,7 +100,7 @@ fun LoginScreen(
             OutlinedTextField(
                 value = uiState.username,
                 onValueChange = viewModel::onUsernameChange,
-                label = { Text("Username") },
+                label = { Text(stringResource(R.string.login_username)) },
                 isError = uiState.usernameError != null,
                 supportingText = {
                     uiState.usernameError?.let { Text(it, color = MaterialTheme.colorScheme.error) }
@@ -113,7 +114,7 @@ fun LoginScreen(
             OutlinedTextField(
                 value = uiState.password,
                 onValueChange = viewModel::onPasswordChange,
-                label = { Text("Password") },
+                label = { Text(stringResource(R.string.login_password)) },
                 isError = uiState.passwordError != null,
                 supportingText = {
                     uiState.passwordError?.let { Text(it, color = MaterialTheme.colorScheme.error) }
@@ -124,7 +125,7 @@ fun LoginScreen(
                     IconButton(onClick = { passwordVisible = !passwordVisible }) {
                         Icon(
                             imageVector = if (passwordVisible) Icons.Filled.VisibilityOff else Icons.Filled.Visibility,
-                            contentDescription = if (passwordVisible) "Hide password" else "Show password"
+                            contentDescription = if (passwordVisible) stringResource(R.string.login_hide_password) else stringResource(R.string.login_show_password)
                         )
                     }
                 },
@@ -150,7 +151,7 @@ fun LoginScreen(
                         strokeWidth = 2.dp
                     )
                 } else {
-                    Text("Log In")
+                    Text(stringResource(R.string.login_button))
                 }
             }
 
@@ -168,13 +169,13 @@ fun LoginScreen(
                 ) {
                     Icon(Icons.Filled.Fingerprint, contentDescription = null)
                     Spacer(modifier = Modifier.width(8.dp))
-                    Text("Login with biometrics")
+                    Text(stringResource(R.string.login_biometric_button))
                 }
             }
 
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = "Test credentials: testuser / password123",
+                text = stringResource(R.string.login_test_credentials),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )

@@ -19,7 +19,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
 import coil.compose.AsyncImage
+import com.nastia.catalogapp.R
 import com.nastia.catalogapp.domain.model.Product
 
 @Composable
@@ -50,7 +52,7 @@ fun ProductGridItem(
                 ) {
                     Icon(
                         imageVector = if (isFavorite) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
-                        contentDescription = "Toggle favorite",
+                        contentDescription = stringResource(R.string.detail_toggle_favorite),
                         tint = if (isFavorite) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurface
                     )
                 }

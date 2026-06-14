@@ -16,9 +16,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
+import com.nastia.catalogapp.R
 import com.nastia.catalogapp.domain.model.Product
 
 @Composable
@@ -48,9 +50,9 @@ fun ProductGridContent(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center
                 ) {
-                    Text("Failed to load products")
+                    Text(stringResource(R.string.products_load_error))
                     Text(
-                        error.message ?: "Unknown error",
+                        error.message ?: stringResource(R.string.error_unknown),
                         style = MaterialTheme.typography.bodySmall
                     )
                 }

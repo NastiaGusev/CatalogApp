@@ -1,3 +1,101 @@
 <resources>
     <string name="app_name">CatalogApp</string>
+
+    <!-- Auth -->
+    <string name="login_title">Welcome to CatalogApp</string>
+    <string name="login_username">Username</string>
+    <string name="login_password">Password</string>
+    <string name="login_show_password">Show password</string>
+    <string name="login_hide_password">Hide password</string>
+    <string name="login_button">Log In</string>
+    <string name="login_biometric_button">Login with biometrics</string>
+    <string name="login_test_credentials">Test credentials: testuser / password123</string>
+    <string name="error_username_required">Username is required</string>
+    <string name="error_password_required">Password is required</string>
+    <string name="error_password_too_short">Password must be at least 4 characters</string>
+    <string name="error_unknown">Unknown error</string>
+
+    <!-- Products -->
+    <string name="products_search_placeholder">Search products…</string>
+    <string name="products_sort_prefix">Sort: %1$s</string>
+    <string name="products_category_all">All</string>
+    <string name="products_load_error">Failed to load products</string>
+    <string name="products_add">Add product</string>
+    <string name="products_in_stock">%1$d in stock</string>
+
+    <!-- Sort options -->
+    <string name="sort_default">Default</string>
+    <string name="sort_price_asc">Price: Low to High</string>
+    <string name="sort_price_desc">Price: High to Low</string>
+    <string name="sort_rating_desc">Rating: High to Low</string>
+    <string name="sort_name_asc">Name: A to Z</string>
+
+    <!-- Product Detail -->
+    <string name="detail_reviews">Reviews</string>
+    <string name="detail_brand">Brand: %1$s</string>
+    <string name="detail_warranty">Warranty: %1$s</string>
+    <string name="detail_shipping">Shipping: %1$s</string>
+    <string name="detail_return_policy">Return policy: %1$s</string>
+    <string name="detail_edit">Edit product</string>
+    <string name="detail_back">Back</string>
+    <string name="detail_toggle_favorite">Toggle favorite</string>
+
+    <!-- Favorites -->
+    <string name="favorites_title">Favorites</string>
+    <string name="favorites_empty_title">No favorites yet</string>
+    <string name="favorites_empty_subtitle">Tap the heart icon on a product to add it here</string>
+    <string name="favorites_removed">Removed \"%1$s\" from favorites</string>
+    <string name="favorites_undo">Undo</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_appearance">Appearance</string>
+    <string name="settings_dark_mode">Dark mode</string>
+    <string name="settings_dark_mode_system">Following system</string>
+    <string name="settings_dark_mode_on">On</string>
+    <string name="settings_dark_mode_off">Off</string>
+    <string name="settings_language">Language</string>
+    <string name="settings_language_english">English</string>
+    <string name="settings_language_hebrew">עברית</string>
+    <string name="settings_security">Security</string>
+    <string name="settings_biometric">Enable biometric login</string>
+    <string name="settings_data">Data</string>
+    <string name="settings_reset">Reset local changes from API</string>
+    <string name="settings_reset_dialog_title">Reset local changes?</string>
+    <string name="settings_reset_dialog_text">This will discard all local edits, added, and deleted products, restoring data from the API on next refresh.</string>
+    <string name="settings_reset_confirm">Reset</string>
+    <string name="settings_logout">Logout</string>
+    <string name="settings_logout_dialog_title">Log out?</string>
+    <string name="settings_logout_dialog_text">You\'ll need to log in again to access the app.</string>
+    <string name="settings_cancel">Cancel</string>
+
+    <!-- CRUD -->
+    <string name="crud_add_title">Add Product</string>
+    <string name="crud_edit_title">Edit Product</string>
+    <string name="crud_field_title">Title*</string>
+    <string name="crud_field_description">Description</string>
+    <string name="crud_field_category">Category*</string>
+    <string name="crud_field_price">Price*</string>
+    <string name="crud_field_stock">Stock*</string>
+    <string name="crud_field_brand">Brand</string>
+    <string name="crud_field_image_url">Image URL</string>
+    <string name="crud_save">Save Changes</string>
+    <string name="crud_add">Add Product</string>
+    <string name="crud_delete_title">Delete product?</string>
+    <string name="crud_delete_text">This product will be removed from your local catalog.</string>
+    <string name="crud_delete">Delete product</string>
+    <string name="crud_delete_confirm">Delete</string>
+    <string name="crud_error_title_required">Title is required</string>
+    <string name="crud_error_category_required">Category is required</string>
+    <string name="crud_error_price_required">Price is required</string>
+    <string name="crud_error_price_invalid">Invalid price</string>
+    <string name="crud_error_price_negative">Price cannot be negative</string>
+    <string name="crud_error_stock_required">Stock is required</string>
+    <string name="crud_error_stock_invalid">Invalid stock value</string>
+    <string name="crud_error_stock_negative">Stock cannot be negative</string>
+
+    <!-- Bottom nav -->
+    <string name="nav_products">Products</string>
+    <string name="nav_favorites">Favorites</string>
+    <string name="nav_settings">Settings</string>
 </resources>

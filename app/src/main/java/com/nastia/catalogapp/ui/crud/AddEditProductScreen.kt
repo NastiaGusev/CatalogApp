@@ -28,10 +28,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.nastia.catalogapp.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -56,16 +58,16 @@ fun AddEditProductScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(if (uiState.isEditMode) "Edit Product" else "Add Product") },
+                title = { Text(stringResource(if (uiState.isEditMode) R.string.crud_edit_title else R.string.crud_add_title)) },
                 navigationIcon = {
                     IconButton(onClick = onProductUpdated) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.detail_back))
                     }
                 },
                 actions = {
                     if (uiState.isEditMode) {
                         IconButton(onClick = { showDeleteDialog = true }) {
-                            Icon(Icons.Filled.Delete, contentDescription = "Delete product")
+                            Icon(Icons.Filled.Delete, contentDescription = stringResource(R.string.crud_delete))
                         }
                     }
                 }
@@ -82,7 +84,7 @@ fun AddEditProductScreen(
             OutlinedTextField(
                 value = uiState.title,
                 onValueChange = viewModel::onTitleChange,
-                label = { Text("Title*") },
+                label = { Text(stringResource(R.string.crud_field_title)) },
                 isError = uiState.titleError != null,
                 supportingText = { uiState.titleError?.let { Text(it) } },
                 modifier = Modifier.fillMaxWidth()
@@ -91,7 +93,7 @@ fun AddEditProductScreen(
             OutlinedTextField(
                 value = uiState.description,
                 onValueChange = viewModel::onDescriptionChange,
-                label = { Text("Description") },
+                label = { Text(stringResource(R.string.crud_field_description)) },
                 minLines = 3,
                 modifier = Modifier.fillMaxWidth().padding(top = 8.dp)
             )
@@ -99,7 +101,7 @@ fun AddEditProductScreen(
             OutlinedTextField(
                 value = uiState.category,
                 onValueChange = viewModel::onCategoryChange,
-                label = { Text("Category*") },
+                label = { Text(stringResource(R.string.crud_field_category)) },
                 isError = uiState.categoryError != null,
                 supportingText = { uiState.categoryError?.let { Text(it) } },
                 modifier = Modifier.fillMaxWidth().padding(top = 8.dp)
@@ -108,7 +110,7 @@ fun AddEditProductScreen(
             OutlinedTextField(
                 value = uiState.price,
                 onValueChange = viewModel::onPriceChange,
-                label = { Text("Price*") },
+                label = { Text(stringResource(R.string.crud_field_price)) },
                 isError = uiState.priceError != null,
                 supportingText = { uiState.priceError?.let { Text(it) } },
                 keyboardOptions = androidx.compose.foundation.text.KeyboardOptions(keyboardType = KeyboardType.Decimal),
@@ -118,7 +120,7 @@ fun AddEditProductScreen(
             OutlinedTextField(
                 value = uiState.stock,
                 onValueChange = viewModel::onStockChange,
-                label = { Text("Stock*") },
+                label = { Text(stringResource(R.string.crud_field_stock)) },
                 isError = uiState.stockError != null,
                 supportingText = { uiState.stockError?.let { Text(it) } },
                 keyboardOptions = androidx.compose.foundation.text.KeyboardOptions(keyboardType = KeyboardType.Number),
@@ -128,14 +130,14 @@ fun AddEditProductScreen(
             OutlinedTextField(
                 value = uiState.brand,
                 onValueChange = viewModel::onBrandChange,
-                label = { Text("Brand") },
+                label = { Text(stringResource(R.string.crud_field_brand)) },
                 modifier = Modifier.fillMaxWidth().padding(top = 8.dp)
             )
 
             OutlinedTextField(
                 value = uiState.thumbnail,
                 onValueChange = viewModel::onThumbnailChange,
-                label = { Text("Image URL") },
+                label = { Text(stringResource(R.string.crud_field_image_url)) },
                 modifier = Modifier.fillMaxWidth().padding(top = 8.dp)
             )
 
@@ -147,7 +149,7 @@ fun AddEditProductScreen(
                 if (uiState.isLoading) {
                     CircularProgressIndicator(modifier = Modifier.size(20.dp))
                 } else {
-                    Text(if (uiState.isEditMode) "Save Changes" else "Add Product")
+                    Text(stringResource(if (uiState.isEditMode) R.string.crud_save else R.string.crud_add))
                 }
             }
         }
@@ -156,16 +158,16 @@ fun AddEditProductScreen(
     if (showDeleteDialog) {
         AlertDialog(
             onDismissRequest = { showDeleteDialog = false },
-            title = { Text("Delete product?") },
-            text = { Text("This product will be removed from your local catalog.") },
+            title = { Text(stringResource(R.string.crud_delete_title)) },
+            text = { Text(stringResource(R.string.crud_delete_text)) },
             confirmButton = {
                 TextButton(onClick = {
                     viewModel.delete()
                     showDeleteDialog = false
-                }) { Text("Delete") }
+                }) { Text(stringResource(R.string.crud_delete_confirm)) }
             },
             dismissButton = {
-                TextButton(onClick = { showDeleteDialog = false }) { Text("Cancel") }
+                TextButton(onClick = { showDeleteDialog = false }) { Text(stringResource(R.string.settings_cancel)) }
             }
         )
     }

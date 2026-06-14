@@ -17,6 +17,8 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.compose.ui.res.stringResource
+import com.nastia.catalogapp.R
 import com.nastia.catalogapp.ui.products.components.CategoryFilterRow
 import com.nastia.catalogapp.ui.products.components.ProductGridContent
 import com.nastia.catalogapp.ui.products.components.ProductSearchBar
@@ -47,7 +49,7 @@ fun ProductListScreen(
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(onClick = onAddProduct) {
-                Icon(Icons.Filled.Add, contentDescription = "Add product")
+                Icon(Icons.Filled.Add, contentDescription = stringResource(R.string.products_add))
             }
         }
     ) { padding ->

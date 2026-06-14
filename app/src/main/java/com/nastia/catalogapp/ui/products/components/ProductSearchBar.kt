@@ -9,7 +9,9 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.nastia.catalogapp.R
 
 @Composable
 fun ProductSearchBar(
@@ -19,7 +21,7 @@ fun ProductSearchBar(
     OutlinedTextField(
         value = query,
         onValueChange = onQueryChange,
-        placeholder = { Text("Search products...") },
+        placeholder = { Text(stringResource(R.string.products_search_placeholder)) },
         leadingIcon = { Icon(Icons.Filled.Search, contentDescription = null) },
         singleLine = true,
         modifier = Modifier

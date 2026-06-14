@@ -25,9 +25,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.nastia.catalogapp.R
 import com.nastia.catalogapp.ui.products.components.ProductImageCarousel
 import com.nastia.catalogapp.ui.products.components.ReviewItem
 
@@ -47,19 +49,19 @@ fun ProductDetailScreen(
                 title = { Text(uiState.product?.title ?: "") },
                 navigationIcon = {
                     IconButton(onClick = onNavigateUp) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.detail_back))
                     }
                 },
                 actions = {
                     IconButton(onClick = { viewModel.toggleFavorite() }) {
                         Icon(
                             imageVector = if (uiState.isFavorite) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
-                            contentDescription = "Toggle favorite",
+                            contentDescription = stringResource(R.string.detail_toggle_favorite),
                             tint = if (uiState.isFavorite) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurface
                         )
                     }
                     IconButton(onClick = { onEditProduct(productId) }) {
-                        Icon(Icons.Filled.Edit, contentDescription = "Edit product")
+                        Icon(Icons.Filled.Edit, contentDescription = stringResource(R.string.detail_edit))
                     }
                 }
             )
@@ -105,7 +107,7 @@ fun ProductDetailScreen(
                             )
                         }
                     }
-                    Text("⭐ ${product.rating} · ${product.stock} in stock", style = MaterialTheme.typography.bodyMedium)
+                    Text("⭐ ${product.rating} · ${stringResource(R.string.products_in_stock, product.stock)}", style = MaterialTheme.typography.bodyMedium)
                     Spacer()
                     Text(product.category, style = MaterialTheme.typography.labelMedium)
                     Spacer()
@@ -113,24 +115,24 @@ fun ProductDetailScreen(
 
                     product.brand?.let {
                         Spacer()
-                        Text("Brand: $it", style = MaterialTheme.typography.bodyMedium)
+                        Text(stringResource(R.string.detail_brand, it), style = MaterialTheme.typography.bodyMedium)
                     }
                     product.warrantyInformation?.let {
                         Spacer()
-                        Text("Warranty: $it", style = MaterialTheme.typography.bodyMedium)
+                        Text(stringResource(R.string.detail_warranty, it), style = MaterialTheme.typography.bodyMedium)
                     }
                     product.shippingInformation?.let {
                         Spacer()
-                        Text("Shipping: $it", style = MaterialTheme.typography.bodyMedium)
+                        Text(stringResource(R.string.detail_shipping, it), style = MaterialTheme.typography.bodyMedium)
                     }
                     product.returnPolicy?.let {
                         Spacer()
-                        Text("Return policy: $it", style = MaterialTheme.typography.bodyMedium)
+                        Text(stringResource(R.string.detail_return_policy, it), style = MaterialTheme.typography.bodyMedium)
                     }
 
                     if (uiState.reviews.isNotEmpty()) {
                         Spacer()
-                        Text("Reviews", style = MaterialTheme.typography.titleMedium)
+                        Text(stringResource(R.string.detail_reviews), style = MaterialTheme.typography.titleMedium)
                     }
                 }
             }

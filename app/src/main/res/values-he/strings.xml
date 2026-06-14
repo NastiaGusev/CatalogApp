@@ -1,0 +1,101 @@
+<resources>
+    <string name="app_name">קטלוג</string>
+
+    <!-- Auth -->
+    <string name="login_title">ברוכים הבאים לקטלוג</string>
+    <string name="login_username">שם משתמש</string>
+    <string name="login_password">סיסמה</string>
+    <string name="login_show_password">הצגת סיסמה</string>
+    <string name="login_hide_password">הסתרת סיסמה</string>
+    <string name="login_button">התחבר</string>
+    <string name="login_biometric_button">התחברות באמצעות ביומטריה</string>
+    <string name="login_test_credentials">פרטי התחברות לבדיקה: testuser / password123</string>
+    <string name="error_username_required">שם משתמש הוא שדה חובה</string>
+    <string name="error_password_required">סיסמה היא שדה חובה</string>
+    <string name="error_password_too_short">הסיסמה צריכה להיות באורך 4 תווים לפחות</string>
+    <string name="error_unknown">שגיאה לא ידועה</string>
+
+    <!-- Products -->
+    <string name="products_search_placeholder">חיפוש מוצרים…</string>
+    <string name="products_sort_prefix">מיון: %1$s</string>
+    <string name="products_category_all">הכל</string>
+    <string name="products_load_error">טעינת המוצרים נכשלה</string>
+    <string name="products_add">הוספת מוצר</string>
+    <string name="products_in_stock">%1$d במלאי</string>
+
+    <!-- Sort options -->
+    <string name="sort_default">ברירת מחדל</string>
+    <string name="sort_price_asc">מחיר: מהזול ליקר</string>
+    <string name="sort_price_desc">מחיר: מהיקר לזול</string>
+    <string name="sort_rating_desc">דירוג: מהגבוה לנמוך</string>
+    <string name="sort_name_asc">שם: א עד ת</string>
+
+    <!-- Product Detail -->
+    <string name="detail_reviews">חוות דעת</string>
+    <string name="detail_brand">מותג: %1$s</string>
+    <string name="detail_warranty">אחריות: %1$s</string>
+    <string name="detail_shipping">משלוח: %1$s</string>
+    <string name="detail_return_policy">מדיניות החזרה: %1$s</string>
+    <string name="detail_edit">עריכת מוצר</string>
+    <string name="detail_back">חזרה</string>
+    <string name="detail_toggle_favorite">הוספה/הסרה ממועדפים</string>
+
+    <!-- Favorites -->
+    <string name="favorites_title">מועדפים</string>
+    <string name="favorites_empty_title">אין מועדפים עדיין</string>
+    <string name="favorites_empty_subtitle">הקישו על סמל הלב במוצר כדי להוסיף אותו לכאן</string>
+    <string name="favorites_removed">\"%1$s\" הוסר מהמועדפים</string>
+    <string name="favorites_undo">ביטול</string>
+
+    <!-- Settings -->
+    <string name="settings_title">הגדרות</string>
+    <string name="settings_appearance">מראה</string>
+    <string name="settings_dark_mode">מצב כהה</string>
+    <string name="settings_dark_mode_system">לפי הגדרות המערכת</string>
+    <string name="settings_dark_mode_on">פעיל</string>
+    <string name="settings_dark_mode_off">כבוי</string>
+    <string name="settings_language">שפה</string>
+    <string name="settings_language_english">English</string>
+    <string name="settings_language_hebrew">עברית</string>
+    <string name="settings_security">אבטחה</string>
+    <string name="settings_biometric">הפעלת התחברות ביומטרית</string>
+    <string name="settings_data">נתונים</string>
+    <string name="settings_reset">איפוס שינויים מקומיים מה-API</string>
+    <string name="settings_reset_dialog_title">לאפס שינויים מקומיים?</string>
+    <string name="settings_reset_dialog_text">פעולה זו תמחק את כל העריכות, ההוספות והמחיקות המקומיות, ותשחזר את הנתונים מה-API בריענון הבא.</string>
+    <string name="settings_reset_confirm">איפוס</string>
+    <string name="settings_logout">התנתקות</string>
+    <string name="settings_logout_dialog_title">להתנתק?</string>
+    <string name="settings_logout_dialog_text">תצטרכו להתחבר מחדש כדי לגשת לאפליקציה.</string>
+    <string name="settings_cancel">ביטול</string>
+
+    <!-- CRUD -->
+    <string name="crud_add_title">הוספת מוצר</string>
+    <string name="crud_edit_title">עריכת מוצר</string>
+    <string name="crud_field_title">כותרת*</string>
+    <string name="crud_field_description">תיאור</string>
+    <string name="crud_field_category">קטגוריה*</string>
+    <string name="crud_field_price">מחיר*</string>
+    <string name="crud_field_stock">מלאי*</string>
+    <string name="crud_field_brand">מותג</string>
+    <string name="crud_field_image_url">כתובת תמונה</string>
+    <string name="crud_save">שמירת שינויים</string>
+    <string name="crud_add">הוספת מוצר</string>
+    <string name="crud_delete_title">למחוק מוצר?</string>
+    <string name="crud_delete_text">המוצר יוסר מהקטלוג המקומי שלך.</string>
+    <string name="crud_delete">מחיקת מוצר</string>
+    <string name="crud_delete_confirm">מחיקה</string>
+    <string name="crud_error_title_required">כותרת היא שדה חובה</string>
+    <string name="crud_error_category_required">קטגוריה היא שדה חובה</string>
+    <string name="crud_error_price_required">מחיר הוא שדה חובה</string>
+    <string name="crud_error_price_invalid">מחיר לא תקין</string>
+    <string name="crud_error_price_negative">המחיר לא יכול להיות שלילי</string>
+    <string name="crud_error_stock_required">מלאי הוא שדה חובה</string>
+    <string name="crud_error_stock_invalid">ערך מלאי לא תקין</string>
+    <string name="crud_error_stock_negative">המלאי לא יכול להיות שלילי</string>
+
+    <!-- Bottom nav -->
+    <string name="nav_products">מוצרים</string>
+    <string name="nav_favorites">מועדפים</string>
+    <string name="nav_settings">הגדרות</string>
+</resources>

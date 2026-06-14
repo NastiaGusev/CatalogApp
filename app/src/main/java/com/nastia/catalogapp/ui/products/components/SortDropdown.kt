@@ -15,7 +15,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.nastia.catalogapp.R
 import com.nastia.catalogapp.domain.model.ProductSort
 
 @Composable
@@ -34,7 +36,7 @@ fun SortDropdown(
         Box {
             AssistChip(
                 onClick = { expanded = true },
-                label = { Text("Sort: ${selected.displayName}") }
+                label = { Text(stringResource(R.string.products_sort_prefix, selected.label())) }
             )
             DropdownMenu(
                 expanded = expanded,
@@ -42,7 +44,7 @@ fun SortDropdown(
             ) {
                 ProductSort.entries.forEach { sort ->
                     DropdownMenuItem(
-                        text = { Text(sort.displayName) },
+                        text = { Text(sort.label()) },
                         onClick = {
                             onSortSelected(sort)
                             expanded = false
@@ -53,3 +55,14 @@ fun SortDropdown(
         }
     }
 }
+
+@Composable
+private fun ProductSort.label(): String = stringResource(
+    when (this) {
+        ProductSort.DEFAULT -> R.string.sort_default
+        ProductSort.PRICE_ASC -> R.string.sort_price_asc
+        ProductSort.PRICE_DESC -> R.string.sort_price_desc
+        ProductSort.RATING_DESC -> R.string.sort_rating_desc
+        ProductSort.NAME_ASC -> R.string.sort_name_asc
+    }
+)

@@ -5,6 +5,7 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import com.nastia.catalogapp.domain.model.AppLanguage
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -37,7 +38,7 @@ class UserPreferencesDataStore @Inject constructor(
     }
 
     val language: Flow<String> = context.dataStore.data.map {
-        it[Keys.LANGUAGE] ?: "en"
+        it[Keys.LANGUAGE] ?: AppLanguage.ENGLISH.code
     }
 
     val isBiometricEnabled: Flow<Boolean> = context.dataStore.data.map {

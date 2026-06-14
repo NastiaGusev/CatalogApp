@@ -12,7 +12,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.nastia.catalogapp.R
 
 @Composable
 fun CategoryFilterRow(
@@ -30,7 +32,7 @@ fun CategoryFilterRow(
         item {
             AssistChip(
                 onClick = { onCategorySelected(null) },
-                label = { Text("All") },
+                label = { Text(stringResource(R.string.products_category_all)) },
                 colors = if (selectedCategory == null) {
                     AssistChipDefaults.assistChipColors(
                         containerColor = MaterialTheme.colorScheme.primaryContainer
