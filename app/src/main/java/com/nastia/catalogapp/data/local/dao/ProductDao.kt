@@ -64,4 +64,7 @@ interface ProductDao {
 
     @Query("DELETE FROM products WHERE id = :id")
     suspend fun deleteById(id: Int)
+
+    @Query("SELECT id FROM products WHERE isLocallyModified = 1")
+    suspend fun getLocallyModifiedIds(): List<Int>
 }

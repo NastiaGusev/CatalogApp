@@ -59,20 +59,22 @@ class ProductRemoteMediator(
 
             db.withTransaction {
                 if (loadType == LoadType.REFRESH) {
-                    // Only clear products that belong to this query's window and aren't
-                    // locally modified/created, to preserve local CRUD edits.
                     db.productDao().clearUnmodifiedProducts()
                     db.remoteKeysDao().deleteByLabel(remoteKeyLabel)
                 }
 
-                val entities = products.mapIndexed { index, dto ->
-                    dto.toEntity(pageOrder = skip + index)
-                }
+                // Don't overwrite locally modified/created products with fresh API data
+                val locallyModifiedIds = db.productDao().getLocallyModifiedIds().toSet()
+
+                val entities = products
+                    .filter { it.id !in locallyModifiedIds }
+                    .mapIndexed { index, dto ->
+                        dto.toEntity(pageOrder = skip + index)
+                    }
                 db.productDao().upsertAll(entities)
 
-                // store reviews too
                 products.forEach { dto ->
-                    if (dto.reviews.isNotEmpty()) {
+                    if (dto.reviews.isNotEmpty() && dto.id !in locallyModifiedIds) {
                         db.reviewDao().upsertAll(dto.reviews.map { it.toEntity(dto.id) })
                     }
                 }

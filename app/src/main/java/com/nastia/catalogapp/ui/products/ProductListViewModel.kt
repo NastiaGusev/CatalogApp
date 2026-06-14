@@ -8,6 +8,7 @@ import com.nastia.catalogapp.domain.model.Product
 import com.nastia.catalogapp.domain.model.ProductSort
 import com.nastia.catalogapp.domain.repository.FavoritesRepository
 import com.nastia.catalogapp.domain.repository.ProductRepository
+import com.nastia.catalogapp.util.CatalogRefreshSignal
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -24,14 +25,16 @@ import javax.inject.Inject
 data class ProductListFilters(
     val searchQuery: String = "",
     val selectedCategory: String? = null,
-    val sortBy: ProductSort = ProductSort.DEFAULT
+    val sortBy: ProductSort = ProductSort.DEFAULT,
+    val refreshTrigger: Int = 0
 )
 
 @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
 @HiltViewModel
 class ProductListViewModel @Inject constructor(
     private val productRepository: ProductRepository,
-    private val favoritesRepository: FavoritesRepository
+    private val favoritesRepository: FavoritesRepository,
+    val catalogRefreshSignal: CatalogRefreshSignal
 ) : ViewModel() {
 
     private val _filters = MutableStateFlow(ProductListFilters())
@@ -75,5 +78,8 @@ class ProductListViewModel @Inject constructor(
                 favoritesRepository.addFavorite(productId)
             }
         }
+    }
+    fun refreshAfterReset() {
+        _filters.update { it.copy(refreshTrigger = it.refreshTrigger + 1) }
     }
 }

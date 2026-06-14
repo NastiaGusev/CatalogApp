@@ -105,7 +105,13 @@ fun CatalogNavHost() {
                 val args = backStackEntry.toRoute<NavRoutes.AddEditProduct>()
                 AddEditProductScreen(
                     productId = args.productId,
-                    onNavigateUp = { navController.navigateUp() }
+                    onProductUpdated = { navController.navigateUp() },
+                    onProductDeleted = {
+                        navController.popBackStack(
+                            route = NavRoutes.ProductList,
+                            inclusive = false
+                        )
+                    }
                 )
             }
         }

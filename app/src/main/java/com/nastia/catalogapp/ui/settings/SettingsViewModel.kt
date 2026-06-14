@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.nastia.catalogapp.domain.repository.AuthRepository
 import com.nastia.catalogapp.domain.repository.ProductRepository
 import com.nastia.catalogapp.domain.repository.SettingsRepository
+import com.nastia.catalogapp.util.CatalogRefreshSignal
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -23,7 +24,8 @@ data class SettingsUiState(
 class SettingsViewModel @Inject constructor(
     private val settingsRepository: SettingsRepository,
     private val authRepository: AuthRepository,
-    private val productRepository: ProductRepository
+    private val productRepository: ProductRepository,
+    private val catalogRefreshSignal: CatalogRefreshSignal
 ) : ViewModel() {
 
     val uiState: StateFlow<SettingsUiState> = combine(
@@ -66,6 +68,7 @@ class SettingsViewModel @Inject constructor(
     fun resetLocalChanges() {
         viewModelScope.launch {
             productRepository.resetLocalChanges()
+            catalogRefreshSignal.notifyReset()
         }
     }
 }

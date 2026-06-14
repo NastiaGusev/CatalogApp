@@ -96,5 +96,7 @@ class ProductRepositoryImpl @Inject constructor(
     override suspend fun resetLocalChanges() {
         db.productDao().deleteLocallyCreatedProducts()
         db.productDao().resetLocalChangesFlags()
+        db.productDao().clearAll()
+        db.remoteKeysDao().clearAll()
     }
 }
