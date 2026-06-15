@@ -2,8 +2,9 @@ package com.nastia.catalogapp.util
 
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
-import androidx.fragment.app.FragmentActivity
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.FragmentActivity
+import com.nastia.catalogapp.R
 
 sealed class BiometricResult {
     object Success : BiometricResult()
@@ -49,9 +50,9 @@ class BiometricAuthHelper(private val activity: FragmentActivity) {
         val prompt = BiometricPrompt(activity, executor, callback)
 
         val promptInfo = BiometricPrompt.PromptInfo.Builder()
-            .setTitle("Biometric Login")
-            .setSubtitle("Use your fingerprint or face to log in")
-            .setNegativeButtonText("Use password instead")
+            .setTitle(activity.getString(R.string.biometric_prompt_title))
+            .setSubtitle(activity.getString(R.string.biometric_prompt_subtitle))
+            .setNegativeButtonText(activity.getString(R.string.biometric_prompt_negative))
             .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_WEAK)
             .build()
 

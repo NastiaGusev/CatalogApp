@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -35,13 +36,25 @@ import com.nastia.catalogapp.ui.settings.SettingsScreen
 fun CatalogNavHost() {
     val navController = rememberNavController()
     val authViewModel: AuthViewModel = hiltViewModel()
-    val isLoggedIn by authViewModel.isLoggedIn.collectAsStateWithLifecycle()
+    val sessionState by authViewModel.sessionState.collectAsStateWithLifecycle()
+    val hasLoaded by authViewModel.hasLoadedSession.collectAsStateWithLifecycle()
 
-    val startGraph = if (isLoggedIn) NavRoutes.MainGraph else NavRoutes.AuthGraph
+    if (!hasLoaded) {
+        LoginScreen(onLoginSuccess = {})
+        return
+    }
+
+    val startDestination = remember {
+        if (sessionState.isLoggedIn && !sessionState.isBiometricEnabled) {
+            NavRoutes.MainGraph
+        } else {
+            NavRoutes.AuthGraph
+        }
+    }
 
     NavHost(
         navController = navController,
-        startDestination = startGraph
+        startDestination = startDestination
     ) {
         // ---- Auth graph ----
         navigation<NavRoutes.AuthGraph>(startDestination = NavRoutes.Login) {

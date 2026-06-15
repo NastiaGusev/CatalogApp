@@ -13,7 +13,14 @@
     <string name="error_username_required">Username is required</string>
     <string name="error_password_required">Password is required</string>
     <string name="error_password_too_short">Password must be at least 4 characters</string>
+    <string name="login_invalid_credentials">Incorrect username or password</string>
     <string name="error_unknown">Unknown error</string>
+    <string name="unlock_title">Unlock CatalogApp</string>
+    <string name="unlock_retry">Try again</string>
+    <string name="unlock_use_password">Use password instead</string>
+    <string name="biometric_prompt_title">Biometric Login</string>
+    <string name="biometric_prompt_subtitle">Use your fingerprint or face to log in</string>
+    <string name="biometric_prompt_negative">Use password instead</string>
 
     <!-- Products -->
     <string name="products_search_placeholder">Search products…</string>

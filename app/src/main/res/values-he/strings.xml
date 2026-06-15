@@ -2,7 +2,7 @@
     <string name="app_name">קטלוג</string>
 
     <!-- Auth -->
-    <string name="login_title">ברוכים הבאים לקטלוג</string>
+    <string name="login_title">ברוכים הבאים לCatalogApp</string>
     <string name="login_username">שם משתמש</string>
     <string name="login_password">סיסמה</string>
     <string name="login_show_password">הצגת סיסמה</string>
@@ -13,7 +13,14 @@
     <string name="error_username_required">שם משתמש הוא שדה חובה</string>
     <string name="error_password_required">סיסמה היא שדה חובה</string>
     <string name="error_password_too_short">הסיסמה צריכה להיות באורך 4 תווים לפחות</string>
+    <string name="login_invalid_credentials">שם משתמש או סיסמה שגויים</string>
     <string name="error_unknown">שגיאה לא ידועה</string>
+    <string name="unlock_title">פתיחת קטלוג</string>
+    <string name="unlock_retry">ניסיון חוזר</string>
+    <string name="unlock_use_password">השתמש בסיסמה</string>
+    <string name="biometric_prompt_title">התחברות ביומטרית</string>
+    <string name="biometric_prompt_subtitle">השתמשו באצבע או בפנים כדי להתחבר</string>
+    <string name="biometric_prompt_negative">השתמש בסיסמה</string>
 
     <!-- Products -->
     <string name="products_search_placeholder">חיפוש מוצרים…</string>
