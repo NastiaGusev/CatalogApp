@@ -46,6 +46,9 @@
     <string name="detail_edit">Edit product</string>
     <string name="detail_back">Back</string>
     <string name="detail_toggle_favorite">Toggle favorite</string>
+    <string name="product_not_found_title">Product not available offline</string>
+    <string name="product_not_found_subtitle">This product hasn\'t been downloaded yet. Connect to the internet to view it.</string>
+    <string name="product_not_found_go_back">Go back</string>
 
     <!-- Favorites -->
     <string name="favorites_title">Favorites</string>

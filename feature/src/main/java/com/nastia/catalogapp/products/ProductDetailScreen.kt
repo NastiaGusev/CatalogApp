@@ -13,6 +13,7 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -44,100 +45,169 @@ fun ProductDetailScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(uiState.product?.title ?: "") },
+                title = {
+                    val title = (uiState as? ProductDetailUiState.Success)?.product?.title ?: ""
+                    Text(title)
+                },
                 navigationIcon = {
                     IconButton(onClick = onNavigateUp) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.detail_back))
+                        Icon(
+                            Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = stringResource(R.string.detail_back)
+                        )
                     }
                 },
                 actions = {
-                    IconButton(onClick = { viewModel.toggleFavorite() }) {
-                        Icon(
-                            imageVector = if (uiState.isFavorite) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
-                            contentDescription = stringResource(R.string.detail_toggle_favorite),
-                            tint = if (uiState.isFavorite) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurface
-                        )
-                    }
-                    IconButton(onClick = { onEditProduct(productId) }) {
-                        Icon(Icons.Filled.Edit, contentDescription = stringResource(R.string.detail_edit))
+                    if (uiState is ProductDetailUiState.Success) {
+                        val state = uiState as ProductDetailUiState.Success
+                        IconButton(onClick = { viewModel.toggleFavorite() }) {
+                            Icon(
+                                imageVector = if (state.isFavorite) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
+                                contentDescription = stringResource(R.string.detail_toggle_favorite),
+                                tint = if (state.isFavorite) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurface
+                            )
+                        }
+                        IconButton(onClick = { onEditProduct(productId) }) {
+                            Icon(
+                                Icons.Filled.Edit,
+                                contentDescription = stringResource(R.string.detail_edit)
+                            )
+                        }
                     }
                 }
             )
         }
     ) { padding ->
-        val product = uiState.product
-
-        if (uiState.isLoading || product == null) {
-            Column(
-                modifier = Modifier.fillMaxSize().padding(padding),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                CircularProgressIndicator()
-            }
-            return@Scaffold
-        }
-
-        LazyColumn(
-            modifier = Modifier.fillMaxSize().padding(padding),
-            contentPadding = androidx.compose.foundation.layout.PaddingValues(16.dp)
-        ) {
-            item {
-                _root_ide_package_.com.nastia.catalogapp.products.components.ProductImageCarousel(
-                    images = product.images.ifEmpty { listOf(product.thumbnail) })
+        when (val state = uiState) {
+            is ProductDetailUiState.Loading -> {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(padding),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    CircularProgressIndicator()
+                }
             }
 
-            item {
-                Column(modifier = Modifier.padding(top = 16.dp)) {
-                    Text(product.title, style = MaterialTheme.typography.headlineSmall)
+            is ProductDetailUiState.NotFound -> {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(padding)
+                        .padding(24.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Text(
+                        stringResource(R.string.product_not_found_title),
+                        style = MaterialTheme.typography.titleMedium
+                    )
                     Spacer()
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(
-                            text = "$${"%.2f".format(product.discountedPrice)}",
-                            style = MaterialTheme.typography.titleLarge,
-                            color = MaterialTheme.colorScheme.primary
-                        )
-                        if (product.discountPercentage > 0) {
-                            Text(
-                                text = "  $${"%.2f".format(product.price)}",
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                textDecoration = androidx.compose.ui.text.style.TextDecoration.LineThrough
-                            )
-                        }
-                    }
-                    Text("⭐ ${product.rating} · ${stringResource(R.string.products_in_stock, product.stock)}", style = MaterialTheme.typography.bodyMedium)
+                    Text(
+                        stringResource(R.string.product_not_found_subtitle),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
                     Spacer()
-                    Text(product.category, style = MaterialTheme.typography.labelMedium)
-                    Spacer()
-                    Text(product.description, style = MaterialTheme.typography.bodyMedium)
-
-                    product.brand?.let {
-                        Spacer()
-                        Text(stringResource(R.string.detail_brand, it), style = MaterialTheme.typography.bodyMedium)
-                    }
-                    product.warrantyInformation?.let {
-                        Spacer()
-                        Text(stringResource(R.string.detail_warranty, it), style = MaterialTheme.typography.bodyMedium)
-                    }
-                    product.shippingInformation?.let {
-                        Spacer()
-                        Text(stringResource(R.string.detail_shipping, it), style = MaterialTheme.typography.bodyMedium)
-                    }
-                    product.returnPolicy?.let {
-                        Spacer()
-                        Text(stringResource(R.string.detail_return_policy, it), style = MaterialTheme.typography.bodyMedium)
-                    }
-
-                    if (uiState.reviews.isNotEmpty()) {
-                        Spacer()
-                        Text(stringResource(R.string.detail_reviews), style = MaterialTheme.typography.titleMedium)
+                    Button(onClick = onNavigateUp) {
+                        Text(stringResource(R.string.product_not_found_go_back))
                     }
                 }
             }
 
-            items(uiState.reviews) { review ->
-                _root_ide_package_.com.nastia.catalogapp.products.components.ReviewItem(review)
+            is ProductDetailUiState.Success -> {
+                val product = state.product
+
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(padding),
+                    contentPadding = androidx.compose.foundation.layout.PaddingValues(16.dp)
+                ) {
+                    item {
+                        _root_ide_package_.com.nastia.catalogapp.products.components.ProductImageCarousel(
+                            images = product.images.ifEmpty { listOf(product.thumbnail) })
+                    }
+
+                    item {
+                        Column(modifier = Modifier.padding(top = 16.dp)) {
+                            Text(product.title, style = MaterialTheme.typography.headlineSmall)
+                            Spacer()
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Text(
+                                    text = "$${"%.2f".format(product.discountedPrice)}",
+                                    style = MaterialTheme.typography.titleLarge,
+                                    color = MaterialTheme.colorScheme.primary
+                                )
+                                if (product.discountPercentage > 0) {
+                                    Text(
+                                        text = "  $${"%.2f".format(product.price)}",
+                                        style = MaterialTheme.typography.bodyMedium,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                        textDecoration = androidx.compose.ui.text.style.TextDecoration.LineThrough
+                                    )
+                                }
+                            }
+                            Text(
+                                "⭐ ${product.rating} · ${
+                                    stringResource(
+                                        R.string.products_in_stock,
+                                        product.stock
+                                    )
+                                }", style = MaterialTheme.typography.bodyMedium
+                            )
+                            Spacer()
+                            Text(product.category, style = MaterialTheme.typography.labelMedium)
+                            Spacer()
+                            Text(product.description, style = MaterialTheme.typography.bodyMedium)
+
+                            product.brand?.let {
+                                Spacer()
+                                Text(
+                                    stringResource(R.string.detail_brand, it),
+                                    style = MaterialTheme.typography.bodyMedium
+                                )
+                            }
+                            product.warrantyInformation?.let {
+                                Spacer()
+                                Text(
+                                    stringResource(R.string.detail_warranty, it),
+                                    style = MaterialTheme.typography.bodyMedium
+                                )
+                            }
+                            product.shippingInformation?.let {
+                                Spacer()
+                                Text(
+                                    stringResource(R.string.detail_shipping, it),
+                                    style = MaterialTheme.typography.bodyMedium
+                                )
+                            }
+                            product.returnPolicy?.let {
+                                Spacer()
+                                Text(
+                                    stringResource(R.string.detail_return_policy, it),
+                                    style = MaterialTheme.typography.bodyMedium
+                                )
+                            }
+
+                            if (state.reviews.isNotEmpty()) {
+                                Spacer()
+                                Text(
+                                    stringResource(R.string.detail_reviews),
+                                    style = MaterialTheme.typography.titleMedium
+                                )
+                            }
+                        }
+                    }
+
+                    items(state.reviews) { review ->
+                        _root_ide_package_.com.nastia.catalogapp.products.components.ReviewItem(
+                            review
+                        )
+                    }
+                }
             }
         }
     }
@@ -145,5 +215,9 @@ fun ProductDetailScreen(
 
 @Composable
 private fun Spacer() {
-    androidx.compose.foundation.layout.Spacer(modifier = Modifier.padding(top = 8.dp).fillMaxWidth())
+    androidx.compose.foundation.layout.Spacer(
+        modifier = Modifier
+            .padding(top = 8.dp)
+            .fillMaxWidth()
+    )
 }

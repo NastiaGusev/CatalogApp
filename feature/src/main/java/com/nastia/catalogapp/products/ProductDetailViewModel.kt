@@ -29,18 +29,17 @@ class ProductDetailViewModel @Inject constructor(
         productRepository.getReviewsForProduct(productId),
         favoritesRepository.isFavorite(productId)
     ) { product, reviews, isFavorite ->
-        ProductDetailUiState(
-            product = product,
-            reviews = reviews,
-            isFavorite = isFavorite,
-            isLoading = product == null
-        )
-    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), ProductDetailUiState())
+        if (product != null) {
+            ProductDetailUiState.Success(product, reviews, isFavorite)
+        } else {
+            ProductDetailUiState.NotFound
+        }
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), ProductDetailUiState.Loading)
 
     fun toggleFavorite() {
         viewModelScope.launch {
-            val current = uiState.value.isFavorite
-            if (current) {
+            val current = uiState.value as? ProductDetailUiState.Success ?: return@launch
+            if (current.isFavorite) {
                 favoritesRepository.removeFavorite(productId)
             } else {
                 favoritesRepository.addFavorite(productId)

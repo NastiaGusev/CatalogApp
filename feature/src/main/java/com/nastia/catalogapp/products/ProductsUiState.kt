@@ -11,9 +11,14 @@ data class ProductListFilters(
     val refreshTrigger: Int = 0
 )
 
-data class ProductDetailUiState(
-    val product: Product? = null,
-    val reviews: List<Review> = emptyList(),
-    val isFavorite: Boolean = false,
-    val isLoading: Boolean = true
-)
+sealed interface ProductDetailUiState {
+    data object Loading : ProductDetailUiState
+
+    data class Success(
+        val product: Product,
+        val reviews: List<Review>,
+        val isFavorite: Boolean
+    ) : ProductDetailUiState
+
+    data object NotFound : ProductDetailUiState
+}

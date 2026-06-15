@@ -46,6 +46,9 @@
     <string name="detail_edit">עריכת מוצר</string>
     <string name="detail_back">חזרה</string>
     <string name="detail_toggle_favorite">הוספה/הסרה ממועדפים</string>
+    <string name="product_not_found_title">המוצר אינו זמין במצב לא מקוון</string>
+    <string name="product_not_found_subtitle">מוצר זה עדיין לא הורד. התחברו לאינטרנט כדי לצפות בו.</string>
+    <string name="product_not_found_go_back">חזרה</string>
 
     <!-- Favorites -->
     <string name="favorites_title">מועדפים</string>
