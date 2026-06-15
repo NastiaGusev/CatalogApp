@@ -34,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.nastia.catalogapp.R
+import com.nastia.catalogapp.model.ProductError
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -86,7 +87,7 @@ fun AddEditProductScreen(
                 onValueChange = viewModel::onTitleChange,
                 label = { Text(stringResource(R.string.crud_field_title)) },
                 isError = uiState.titleError != null,
-                supportingText = { uiState.titleError?.let { Text(it) } },
+                supportingText = { uiState.titleError?.let { Text(it.toMessage()) } },
                 modifier = Modifier.fillMaxWidth()
             )
 
@@ -103,7 +104,7 @@ fun AddEditProductScreen(
                 onValueChange = viewModel::onCategoryChange,
                 label = { Text(stringResource(R.string.crud_field_category)) },
                 isError = uiState.categoryError != null,
-                supportingText = { uiState.categoryError?.let { Text(it) } },
+                supportingText = { uiState.categoryError?.let { Text(it.toMessage()) } },
                 modifier = Modifier.fillMaxWidth().padding(top = 8.dp)
             )
 
@@ -112,7 +113,7 @@ fun AddEditProductScreen(
                 onValueChange = viewModel::onPriceChange,
                 label = { Text(stringResource(R.string.crud_field_price)) },
                 isError = uiState.priceError != null,
-                supportingText = { uiState.priceError?.let { Text(it) } },
+                supportingText = { uiState.priceError?.let { Text(it.toMessage()) } },
                 keyboardOptions = androidx.compose.foundation.text.KeyboardOptions(keyboardType = KeyboardType.Decimal),
                 modifier = Modifier.fillMaxWidth().padding(top = 8.dp)
             )
@@ -122,7 +123,7 @@ fun AddEditProductScreen(
                 onValueChange = viewModel::onStockChange,
                 label = { Text(stringResource(R.string.crud_field_stock)) },
                 isError = uiState.stockError != null,
-                supportingText = { uiState.stockError?.let { Text(it) } },
+                supportingText = { uiState.stockError?.let { Text(it.toMessage()) } },
                 keyboardOptions = androidx.compose.foundation.text.KeyboardOptions(keyboardType = KeyboardType.Number),
                 modifier = Modifier.fillMaxWidth().padding(top = 8.dp)
             )
@@ -171,4 +172,16 @@ fun AddEditProductScreen(
             }
         )
     }
+}
+
+@Composable
+private fun ProductError.toMessage(): String = when (this) {
+    ProductError.TITLE_REQUIRED -> stringResource(R.string.crud_error_title_required)
+    ProductError.CATEGORY_REQUIRED -> stringResource(R.string.crud_error_category_required)
+    ProductError.PRICE_REQUIRED -> stringResource(R.string.crud_error_price_required)
+    ProductError.PRICE_INVALID -> stringResource(R.string.crud_error_price_invalid)
+    ProductError.PRICE_NEGATIVE -> stringResource(R.string.crud_error_price_negative)
+    ProductError.STOCK_REQUIRED -> stringResource(R.string.crud_error_stock_required)
+    ProductError.STOCK_INVALID -> stringResource(R.string.crud_error_stock_invalid)
+    ProductError.STOCK_NEGATIVE -> stringResource(R.string.crud_error_stock_negative)
 }

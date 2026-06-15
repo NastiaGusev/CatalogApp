@@ -14,12 +14,6 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-data class SettingsUiState(
-    val isDarkMode: Boolean? = null, // null = follow system
-    val language: String = "en",
-    val isBiometricEnabled: Boolean = false
-)
-
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
     private val settingsRepository: SettingsRepository,

@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import com.nastia.catalogapp.model.Product
 import com.nastia.catalogapp.repository.ProductRepository
+import com.nastia.catalogapp.usecase.ValidateProductInputUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -15,31 +16,11 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-data class AddEditProductUiState(
-    val productId: Int? = null,
-    val originalProduct: Product? = null,
-    val title: String = "",
-    val description: String = "",
-    val category: String = "",
-    val price: String = "",
-    val stock: String = "",
-    val brand: String = "",
-    val thumbnail: String = "",
-    val titleError: String? = null,
-    val priceError: String? = null,
-    val categoryError: String? = null,
-    val stockError: String? = null,
-    val isLoading: Boolean = false,
-    val isSaved: Boolean = false,
-    val isDeleted: Boolean = false
-) {
-    val isEditMode: Boolean get() = productId != null
-}
-
 @HiltViewModel
 class AddEditProductViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    private val productRepository: ProductRepository
+    private val productRepository: ProductRepository,
+    private val validateProductInput: ValidateProductInputUseCase
 ) : ViewModel() {
 
     private val args = savedStateHandle.toRoute<com.nastia.catalogapp.navigation.NavRoutes.AddEditProduct>()
@@ -79,35 +60,22 @@ class AddEditProductViewModel @Inject constructor(
 
     fun save() {
         val state = _uiState.value
+        val validation = validateProductInput(state.title, state.category, state.price, state.stock)
 
-        val titleError = if (state.title.isBlank()) "Title is required" else null
-        val categoryError = if (state.category.isBlank()) "Category is required" else null
-        val priceValue = state.price.toDoubleOrNull()
-        val priceError = when {
-            state.price.isBlank() -> "Price is required"
-            priceValue == null -> "Invalid price"
-            priceValue < 0 -> "Price cannot be negative"
-            else -> null
-        }
-        val stockValue = state.stock.toIntOrNull()
-        val stockError = when {
-            state.stock.isBlank() -> "Stock is required"
-            stockValue == null -> "Invalid stock value"
-            stockValue < 0 -> "Stock cannot be negative"
-            else -> null
-        }
-
-        if (titleError != null || categoryError != null || priceError != null || stockError != null) {
+        if (!validation.isValid) {
             _uiState.update {
                 it.copy(
-                    titleError = titleError,
-                    categoryError = categoryError,
-                    priceError = priceError,
-                    stockError = stockError
+                    titleError = validation.titleError,
+                    categoryError = validation.categoryError,
+                    priceError = validation.priceError,
+                    stockError = validation.stockError
                 )
             }
             return
         }
+
+        val priceValue = validation.priceValue!!
+        val stockValue = validation.stockValue!!
 
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true) }
@@ -117,8 +85,8 @@ class AddEditProductViewModel @Inject constructor(
                     title = state.title,
                     description = state.description,
                     category = state.category,
-                    price = priceValue!!,
-                    stock = stockValue!!,
+                    price = priceValue,
+                    stock = stockValue,
                     brand = state.brand.ifBlank { null },
                     thumbnail = state.thumbnail.ifBlank { state.originalProduct.thumbnail },
                     images = if (state.thumbnail.isNotBlank() && state.thumbnail != state.originalProduct.thumbnail)
@@ -130,10 +98,10 @@ class AddEditProductViewModel @Inject constructor(
                     title = state.title,
                     description = state.description,
                     category = state.category,
-                    price = priceValue!!,
+                    price = priceValue,
                     discountPercentage = 0.0,
                     rating = 0.0,
-                    stock = stockValue!!,
+                    stock = stockValue,
                     brand = state.brand.ifBlank { null },
                     thumbnail = state.thumbnail.ifBlank {
                         "https://cdn.dummyjson.com/product-images/placeholder.jpg"

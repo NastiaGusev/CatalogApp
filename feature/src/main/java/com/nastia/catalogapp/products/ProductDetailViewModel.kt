@@ -4,8 +4,6 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
-import com.nastia.catalogapp.model.Product
-import com.nastia.catalogapp.model.Review
 import com.nastia.catalogapp.repository.FavoritesRepository
 import com.nastia.catalogapp.repository.ProductRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,13 +14,6 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-data class ProductDetailUiState(
-    val product: Product? = null,
-    val reviews: List<Review> = emptyList(),
-    val isFavorite: Boolean = false,
-    val isLoading: Boolean = true
-)
-
 @HiltViewModel
 class ProductDetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
@@ -30,7 +21,8 @@ class ProductDetailViewModel @Inject constructor(
     private val favoritesRepository: FavoritesRepository
 ) : ViewModel() {
 
-    private val productId: Int = savedStateHandle.toRoute<com.nastia.catalogapp.navigation.NavRoutes.ProductDetail>().productId
+    private val productId: Int =
+        savedStateHandle.toRoute<com.nastia.catalogapp.navigation.NavRoutes.ProductDetail>().productId
 
     val uiState: StateFlow<ProductDetailUiState> = combine(
         productRepository.getProductById(productId),

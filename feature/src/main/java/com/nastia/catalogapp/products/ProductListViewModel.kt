@@ -22,13 +22,6 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-data class ProductListFilters(
-    val searchQuery: String = "",
-    val selectedCategory: String? = null,
-    val sortBy: ProductSort = ProductSort.DEFAULT,
-    val refreshTrigger: Int = 0
-)
-
 @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
 @HiltViewModel
 class ProductListViewModel @Inject constructor(
@@ -79,6 +72,7 @@ class ProductListViewModel @Inject constructor(
             }
         }
     }
+
     fun refreshAfterReset() {
         _filters.update { it.copy(refreshTrigger = it.refreshTrigger + 1) }
     }
