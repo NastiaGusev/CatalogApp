@@ -1,6 +1,6 @@
 package com.nastia.catalogapp.auth
 
-import com.nastia.catalogapp.domain.model.AuthError
+import com.nastia.catalogapp.model.AuthError
 
 data class LoginUiState(
     val username: String = "",

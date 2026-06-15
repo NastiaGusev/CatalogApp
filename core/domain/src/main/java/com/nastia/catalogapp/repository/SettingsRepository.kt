@@ -1,4 +1,4 @@
-package com.nastia.catalogapp.domain.repository
+package com.nastia.catalogapp.repository
 
 import kotlinx.coroutines.flow.Flow
 

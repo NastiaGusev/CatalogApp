@@ -29,7 +29,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.nastia.catalogapp.R
-import com.nastia.catalogapp.domain.model.AppLanguage
+import com.nastia.catalogapp.model.AppLanguage
+import com.nastia.catalogapp.settings.components.LanguageOption
 import com.nastia.catalogapp.settings.components.displayNameRes
 import com.nastia.catalogapp.util.LocaleHelper
 
@@ -92,7 +93,7 @@ fun SettingsScreen(
                 val activity = context as? Activity
 
                 AppLanguage.entries.forEach { language ->
-                    _root_ide_package_.com.nastia.catalogapp.settings.components.LanguageOption(
+                    LanguageOption(
                         selected = uiState.language == language.code,
                         label = stringResource(language.displayNameRes),
                         onClick = {

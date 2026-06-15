@@ -4,9 +4,9 @@ import com.nastia.catalogapp.data.local.entity.ProductEntity
 import com.nastia.catalogapp.data.local.entity.ReviewEntity
 import com.nastia.catalogapp.data.remote.dto.ProductDto
 import com.nastia.catalogapp.data.remote.dto.ReviewDto
-import com.nastia.catalogapp.domain.model.Dimensions
-import com.nastia.catalogapp.domain.model.Product
-import com.nastia.catalogapp.domain.model.Review
+import com.nastia.catalogapp.model.Dimensions
+import com.nastia.catalogapp.model.Product
+import com.nastia.catalogapp.model.Review
 
 // DTO -> Entity
 fun ProductDto.toEntity(pageOrder: Int = Int.MAX_VALUE): ProductEntity {

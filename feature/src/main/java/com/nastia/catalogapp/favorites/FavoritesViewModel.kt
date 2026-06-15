@@ -2,8 +2,8 @@ package com.nastia.catalogapp.favorites
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nastia.catalogapp.domain.model.Product
-import com.nastia.catalogapp.domain.repository.FavoritesRepository
+import com.nastia.catalogapp.model.Product
+import com.nastia.catalogapp.repository.FavoritesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted

@@ -1,4 +1,4 @@
-package com.nastia.catalogapp.domain.model
+package com.nastia.catalogapp.model
 
 enum class AuthError {
     USERNAME_REQUIRED,

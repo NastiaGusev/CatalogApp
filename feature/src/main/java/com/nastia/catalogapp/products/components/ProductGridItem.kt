@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.res.stringResource
 import coil.compose.AsyncImage
 import com.nastia.catalogapp.R
-import com.nastia.catalogapp.domain.model.Product
+import com.nastia.catalogapp.model.Product
 
 @Composable
 fun ProductGridItem(

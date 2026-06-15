@@ -43,7 +43,7 @@ import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.nastia.catalogapp.R
-import com.nastia.catalogapp.domain.model.AuthError
+import com.nastia.catalogapp.model.AuthError
 import com.nastia.catalogapp.util.BiometricAuthHelper
 import com.nastia.catalogapp.util.BiometricResult
 

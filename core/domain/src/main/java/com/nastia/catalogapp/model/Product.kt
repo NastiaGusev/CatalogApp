@@ -1,4 +1,4 @@
-package com.nastia.catalogapp.domain.model
+package com.nastia.catalogapp.model
 
 data class Product(
     val id: Int,

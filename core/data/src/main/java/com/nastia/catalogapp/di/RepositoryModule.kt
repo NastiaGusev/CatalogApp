@@ -4,10 +4,10 @@ import com.nastia.catalogapp.data.repository.AuthRepositoryImpl
 import com.nastia.catalogapp.data.repository.FavoritesRepositoryImpl
 import com.nastia.catalogapp.data.repository.ProductRepositoryImpl
 import com.nastia.catalogapp.data.repository.SettingsRepositoryImpl
-import com.nastia.catalogapp.domain.repository.AuthRepository
-import com.nastia.catalogapp.domain.repository.FavoritesRepository
-import com.nastia.catalogapp.domain.repository.ProductRepository
-import com.nastia.catalogapp.domain.repository.SettingsRepository
+import com.nastia.catalogapp.repository.AuthRepository
+import com.nastia.catalogapp.repository.FavoritesRepository
+import com.nastia.catalogapp.repository.ProductRepository
+import com.nastia.catalogapp.repository.SettingsRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

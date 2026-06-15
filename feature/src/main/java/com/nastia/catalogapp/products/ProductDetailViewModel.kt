@@ -4,10 +4,10 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
-import com.nastia.catalogapp.domain.model.Product
-import com.nastia.catalogapp.domain.model.Review
-import com.nastia.catalogapp.domain.repository.FavoritesRepository
-import com.nastia.catalogapp.domain.repository.ProductRepository
+import com.nastia.catalogapp.model.Product
+import com.nastia.catalogapp.model.Review
+import com.nastia.catalogapp.repository.FavoritesRepository
+import com.nastia.catalogapp.repository.ProductRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow

@@ -1,7 +1,7 @@
 package com.nastia.catalogapp.data.repository
 
 import com.nastia.catalogapp.data.local.datastore.UserPreferencesDataStore
-import com.nastia.catalogapp.domain.repository.SettingsRepository
+import com.nastia.catalogapp.repository.SettingsRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

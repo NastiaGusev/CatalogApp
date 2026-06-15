@@ -3,8 +3,8 @@ package com.nastia.catalogapp.data.repository
 import com.nastia.catalogapp.data.local.CatalogDatabase
 import com.nastia.catalogapp.data.local.entity.FavoriteEntity
 import com.nastia.catalogapp.data.mapper.toDomain
-import com.nastia.catalogapp.domain.model.Product
-import com.nastia.catalogapp.domain.repository.FavoritesRepository
+import com.nastia.catalogapp.model.Product
+import com.nastia.catalogapp.repository.FavoritesRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine

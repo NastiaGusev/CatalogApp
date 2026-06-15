@@ -9,10 +9,10 @@ import com.nastia.catalogapp.data.local.CatalogDatabase
 import com.nastia.catalogapp.data.mapper.toDomain
 import com.nastia.catalogapp.data.mapper.toEntity
 import com.nastia.catalogapp.data.remote.api.ProductApi
-import com.nastia.catalogapp.domain.model.Product
-import com.nastia.catalogapp.domain.model.ProductSort
-import com.nastia.catalogapp.domain.model.Review
-import com.nastia.catalogapp.domain.repository.ProductRepository
+import com.nastia.catalogapp.model.Product
+import com.nastia.catalogapp.model.ProductSort
+import com.nastia.catalogapp.model.Review
+import com.nastia.catalogapp.repository.ProductRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject

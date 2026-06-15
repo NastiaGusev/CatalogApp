@@ -1,6 +1,6 @@
-package com.nastia.catalogapp.domain.repository
+package com.nastia.catalogapp.repository
 
-import com.nastia.catalogapp.domain.model.Product
+import com.nastia.catalogapp.model.Product
 import kotlinx.coroutines.flow.Flow
 
 interface FavoritesRepository {

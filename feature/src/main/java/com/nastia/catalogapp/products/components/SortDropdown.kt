@@ -18,7 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.nastia.catalogapp.R
-import com.nastia.catalogapp.domain.model.ProductSort
+import com.nastia.catalogapp.model.ProductSort
 
 @Composable
 fun SortDropdown(

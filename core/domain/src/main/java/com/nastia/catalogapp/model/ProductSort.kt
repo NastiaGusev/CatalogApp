@@ -1,4 +1,4 @@
-package com.nastia.catalogapp.domain.model
+package com.nastia.catalogapp.model
 
 enum class ProductSort(val apiValue: String) {
     DEFAULT("default"),

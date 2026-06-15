@@ -4,10 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.nastia.catalogapp.domain.model.Product
-import com.nastia.catalogapp.domain.model.ProductSort
-import com.nastia.catalogapp.domain.repository.FavoritesRepository
-import com.nastia.catalogapp.domain.repository.ProductRepository
+import com.nastia.catalogapp.model.Product
+import com.nastia.catalogapp.model.ProductSort
+import com.nastia.catalogapp.repository.FavoritesRepository
+import com.nastia.catalogapp.repository.ProductRepository
 import com.nastia.catalogapp.util.CatalogRefreshSignal
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow

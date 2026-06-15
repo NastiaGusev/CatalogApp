@@ -1,6 +1,6 @@
-package com.nastia.catalogapp.domain.usecase
+package com.nastia.catalogapp.usecase
 
-import com.nastia.catalogapp.domain.model.AuthError
+import com.nastia.catalogapp.model.AuthError
 import javax.inject.Inject
 
 class ValidateLoginInputUseCase @Inject constructor() {

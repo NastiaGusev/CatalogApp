@@ -2,9 +2,9 @@ package com.nastia.catalogapp.auth
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nastia.catalogapp.domain.model.AuthError
-import com.nastia.catalogapp.domain.repository.AuthRepository
-import com.nastia.catalogapp.domain.usecase.ValidateLoginInputUseCase
+import com.nastia.catalogapp.model.AuthError
+import com.nastia.catalogapp.repository.AuthRepository
+import com.nastia.catalogapp.usecase.ValidateLoginInputUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted

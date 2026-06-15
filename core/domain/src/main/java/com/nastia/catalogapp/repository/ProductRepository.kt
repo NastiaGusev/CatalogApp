@@ -1,9 +1,9 @@
-package com.nastia.catalogapp.domain.repository
+package com.nastia.catalogapp.repository
 
 import androidx.paging.PagingData
-import com.nastia.catalogapp.domain.model.Product
-import com.nastia.catalogapp.domain.model.ProductSort
-import com.nastia.catalogapp.domain.model.Review
+import com.nastia.catalogapp.model.Product
+import com.nastia.catalogapp.model.ProductSort
+import com.nastia.catalogapp.model.Review
 import kotlinx.coroutines.flow.Flow
 
 interface ProductRepository {
