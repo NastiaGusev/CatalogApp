@@ -1,6 +1,8 @@
 package com.nastia.catalogapp.data.repository
 
 import com.nastia.catalogapp.data.local.datastore.UserPreferencesDataStore
+import com.nastia.catalogapp.model.AuthError
+import com.nastia.catalogapp.repository.AuthException
 import com.nastia.catalogapp.repository.AuthRepository
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
@@ -22,7 +24,7 @@ class AuthRepositoryImpl @Inject constructor(
             dataStore.setLoggedIn(username)
             Result.success(Unit)
         } else {
-            Result.failure(InvalidCredentialsException())
+            Result.failure(AuthException(AuthError.INVALID_CREDENTIALS))
         }
     }
 
@@ -42,5 +44,3 @@ class AuthRepositoryImpl @Inject constructor(
         )
     }
 }
-
-class InvalidCredentialsException : Exception("Invalid username or password")

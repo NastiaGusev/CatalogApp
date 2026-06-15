@@ -1,5 +1,6 @@
 package com.nastia.catalogapp.repository
 
+import com.nastia.catalogapp.model.AuthError
 import kotlinx.coroutines.flow.Flow
 
 interface AuthRepository {
@@ -11,3 +12,5 @@ interface AuthRepository {
     suspend fun logout()
     suspend fun setBiometricEnabled(enabled: Boolean)
 }
+
+class AuthException(val error: AuthError) : Exception()

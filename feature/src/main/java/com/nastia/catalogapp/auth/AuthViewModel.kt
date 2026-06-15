@@ -3,6 +3,7 @@ package com.nastia.catalogapp.auth
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nastia.catalogapp.model.AuthError
+import com.nastia.catalogapp.repository.AuthException
 import com.nastia.catalogapp.repository.AuthRepository
 import com.nastia.catalogapp.usecase.ValidateLoginInputUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -61,12 +62,25 @@ class AuthViewModel @Inject constructor(
                 onSuccess = {
                     _uiState.update { it.copy(isLoading = false, loginSuccess = true) }
                 },
-                onFailure = {
-                    _uiState.update {
-                        it.copy(
-                            isLoading = false,
-                            formError = AuthError.INVALID_CREDENTIALS
-                        )
+                onFailure = { exception ->
+                    when (exception) {
+                        is AuthException -> {
+                            _uiState.update {
+                                it.copy(
+                                    isLoading = false,
+                                    formError = exception.error
+                                )
+                            }
+                        }
+
+                        else -> {
+                            _uiState.update {
+                                it.copy(
+                                    isLoading = false,
+                                    formError = AuthError.INVALID_CREDENTIALS
+                                )
+                            }
+                        }
                     }
                 }
             )
