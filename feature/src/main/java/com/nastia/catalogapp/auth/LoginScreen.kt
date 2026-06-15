@@ -198,13 +198,6 @@ fun LoginScreen(
                     onCheckedChange = { viewModel.setBiometricEnabled(it) }
                 )
             }
-
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = stringResource(R.string.login_test_credentials),
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
         }
     }
 }
